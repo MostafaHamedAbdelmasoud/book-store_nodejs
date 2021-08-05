@@ -1,0 +1,51 @@
+extends ../layouts/layout
+
+block content
+    .content-wrapper
+        .page-header
+            h3.page-title  Basic Tables
+            nav(aria-label='breadcrumb')
+                ol.breadcrumb
+                    li.breadcrumb-item
+                        a(href='#') Tables
+                    li.breadcrumb-item.active(aria-current='page') Basic tables
+        .row
+            .col-lg-12.grid-margin.stretch-card
+                .card
+                    .card-body
+                        .row
+                            .col-md-4
+                                h4.card-title Basic Table
+                            .col-md-4
+                            .col-md-4(style="text-align:right")
+                                a(href='/books/create')
+                                    button.btn.btn-primary.btn-fw(type='button') Add New Book
+                        p.card-description
+                            | Add class
+                            code .table
+                        .table-responsive
+                            table.table
+                                thead
+                                    tr
+                                        th Profile
+                                        th VatNo.
+                                        th Created
+                                        th Status
+                                tbody
+                                    tr
+                                        td Jacob
+                                        td 53275531
+                                        td 12 May 2017
+                                        td
+                                            label.badge.badge-danger Pending
+                                    each val, index in books
+                                        tr
+                                            td=val.name
+                                            td 53275532
+                                            td 15 May 2017
+                                            td
+                                                p lol
+
+
+
+

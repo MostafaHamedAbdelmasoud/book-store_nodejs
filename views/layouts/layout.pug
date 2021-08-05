@@ -1,0 +1,74 @@
+doctype html
+html(lang='en')
+    head
+        // Required meta tags
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        title Corona Admin
+        // plugins:css
+        link(rel='stylesheet' href='/assets/vendors/mdi/css/materialdesignicons.min.css')
+        link(rel='stylesheet' href='/assets/vendors/css/vendor.bundle.base.css')
+        // endinject
+        // Plugin css for this page
+        link(rel='stylesheet' href='/assets/vendors/jvectormap/jquery-jvectormap.css')
+        link(rel='stylesheet' href='/assets/vendors/flag-icon-css/css/flag-icon.min.css')
+        link(rel='stylesheet' href='/assets/vendors/owl-carousel-2/owl.carousel.min.css')
+        link(rel='stylesheet' href='/assets/vendors/owl-carousel-2/owl.theme.default.min.css')
+        // End plugin css for this page
+        // inject:css
+        // endinject
+        // Layout styles
+        link(rel='stylesheet' href='/assets/css/style.css')
+        // End layout styles
+        link(rel='shortcut icon' href='/assets/images/favicon.png')
+    body
+        .container-scroller
+            // partial:partials/_sidebar.html
+            nav#sidebar.sidebar.sidebar-offcanvas
+                .sidebar-brand-wrapper.d-none.d-lg-flex.align-items-center.justify-content-center.fixed-top
+                    a.sidebar-brand.brand-logo(href='index.html')
+                        img(src='/assets/images/logo.svg' alt='logo')
+                    a.sidebar-brand.brand-logo-mini(href='index.html')
+                        img(src='/assets/images/logo-mini.svg' alt='logo')
+                ul.nav
+                    li.nav-item.profile
+                        .profile-desc
+                            .profile-pic
+                                .count-indicator
+                                    img.img-xs.rounded-circle(src='/assets/images/faces/face15.jpg' alt='')
+                                    span.count.bg-success
+                                .profile-name
+                                    h5.mb-0.font-weight-normal Henry Klein
+                                    span Gold Member
+                            a#profile-dropdown(href='#' data-toggle='dropdown')
+                                i.mdi.mdi-dots-vertical
+                            .dropdown-menu.dropdown-menu-right.sidebar-dropdown.preview-list(aria-labelledby='profile-dropdown')
+                                a.dropdown-item.preview-item(href='#')
+                                    .preview-thumbnail
+                                        .preview-icon.bg-dark.rounded-circle
+                                            i.mdi.mdi-settings.text-primary
+                                    .preview-item-content
+                                        p.preview-subject.ellipsis.mb-1.text-small Account settings
+                                .dropdown-divider
+                                a.dropdown-item.preview-item(href='#')
+                                    .preview-thumbnail
+                                        .preview-icon.bg-dark.rounded-circle
+                                            i.mdi.mdi-onepassword.text-info
+                                    .preview-item-content
+                                        p.preview-subject.ellipsis.mb-1.text-small Change Password
+                                .dropdown-divider
+                                a.dropdown-item.preview-item(href='#')
+                                    .preview-thumbnail
+                                        .preview-icon.bg-dark.rounded-circle
+                                            i.mdi.mdi-calendar-today.text-success
+                                    .preview-item-content
+                                        p.preview-subject.ellipsis.mb-1.text-small To-do list
+                    include ../partials/sidebar
+            // partial
+            .container-fluid.page-body-wrapper
+                include ../partials/header
+                .main-panel
+                    block content
+
+
+                    include ../partials/footer

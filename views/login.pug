@@ -1,0 +1,35 @@
+extends layouts/Auth_layout
+
+block content
+
+    h3.card-title.text-left.mb-3 Login
+    form(action='/login' method='post')
+        .form-group
+            label Email
+            input.form-control.p_input(type='email' name='email')
+        .form-group
+            label Password
+            input.form-control.p_input(type='password' name='password')
+        .form-group.d-flex.align-items-center.justify-content-between
+            .form-check
+                label.form-check-label
+                    input.form-check-input(type='checkbox')
+                    |  Remember me
+            a.forgot-pass(href='#') Forgot password
+        .text-center
+            button.btn.btn-primary.btn-block.enter-btn(type='submit') login
+        .d-flex
+            button.btn.btn-facebook.col.mr-2
+                i.mdi.mdi-facebook
+                |  Facebook
+            button.btn.btn-google.col
+                i.mdi.mdi-google-plus
+                |  Google plus
+        p.sign-up.text-center
+            | Already have an Account?
+            a(href='/register')  Sign Up
+        p.terms
+            | By creating an account you are accepting our
+            a(href='#')
+                | Terms &
+                | Conditions
