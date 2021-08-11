@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 
 const passport = require('passport')
@@ -39,6 +40,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use('css',express.static(path.join(__dirname, 'public/assets')));
 
@@ -49,7 +52,8 @@ app.use(session({
     saveUninitialized: true,
     store:  MongoStore.create({
         // mongooseConnection: mongoose.connection,
-        mongoUrl: process.env.MONGODB_URL
+        mongoUrl: process.env.MONGODB_URL,
+        ttl: 24 * 60 * 60
     })
 }))
 // Passport Config
@@ -66,8 +70,26 @@ app.use(function(req, res, next) {
     next();
 })
 
+// app.use(methodOverride(function (req, res) {
+//     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+//         // look in urlencoded POST bodies and delete it
+//         var method = req.body._method
+//         delete req.body._method
+//         return method
+//     }
+// }))
+
 app.use(flash())
-app.use(methodOverride('_method'))
+
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        // look in urlencoded POST bodies and delete it
+        return req.body._method;
+    }
+}));
+// app.use(methodOverride('_method'))
 
 
 var authRouter = require('./routes/auth');

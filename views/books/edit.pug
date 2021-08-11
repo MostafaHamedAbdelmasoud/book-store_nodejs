@@ -10,18 +10,22 @@ block content
                     .card-body
                         h4.card-title Basic form elements
                         p.card-description  Basic form elements
-                        form.forms-sample(action='/books/create' method="post" enctype="multipart/form-data")
+                        form.forms-sample(action='/books/update?id='+book._id method="post" enctype="multipart/form-data")
                             .form-group
                                 label(for='exampleInputName1') Name
-                                input#exampleInputName1.form-control(type='text' name="name" placeholder='Name')
+                                input#exampleInputName1.form-control(type='text' name="name" placeholder='Name' value=book.name)
                             .form-group
                                 label File upload
-                                input.form-control(type='file' name='fileField')
+                                input.form-control(type='file' name='fileField' value=book.file)
+                                a(href=book.getFile() target="_black") preview #{book.file}
                             .form-group
                                 label Preview Image upload
-                                input.form-control(type='file' name='imageField')
+                                input.form-control(type='file' name='imageField' value=book.image)
+                                br
+                                img(src=book.getImage() style="width:200px;height:200px;border-radius:0%")
                             .form-group
                                 label(for='exampleTextarea1') Description
-                                textarea#exampleTextarea1.form-control(name="description" rows='4')
+                                textarea#exampleTextarea1.form-control(name="description" rows='4') #{book.description}
                             button.btn.btn-primary.mr-2(type='submit') Submit
+                        a(href="/books/index")
                             button.btn.btn-dark Cancel

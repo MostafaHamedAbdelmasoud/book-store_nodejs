@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const validator = require('validator')
 const User = require('./user')
+const moment = require('moment')
+
 const bookSchema = new Schema({
     name: {
         type: String,
@@ -40,6 +42,19 @@ const bookSchema = new Schema({
 
 bookSchema.methods.getAuthor = function (user_id) {
     return User.findById(user_id);
+};
+
+
+bookSchema.methods.getImage = function () {
+    return '/uploads/images/'+this.image;
+};
+
+bookSchema.methods.getFile = function () {
+    return '/uploads/files/'+this.file;
+};
+
+bookSchema.methods.getCreatedAt = function () {
+    return moment(this.createdAt).format("DD-MM-YYYY h:mm:ss");
 };
 
 const Book = mongoose.model('Book', bookSchema);
