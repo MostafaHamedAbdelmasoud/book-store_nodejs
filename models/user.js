@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const validator = require('validator')
 
 const bcrypt = require('bcrypt-nodejs')
+const moment = require("moment");
 
 const userSchema = new Schema({
     name: {
@@ -60,12 +61,18 @@ userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-userSchema.methods.isMember = function() {
-    return (this.role === "member");
+userSchema.methods.isAdmin = function() {
+    return (this.type === 1);
 };
 userSchema.methods.isAuthor = function() {
-    return (this.role === "author");
+    return (this.type === 2);
 };
+
+
+userSchema.methods.getCreatedAt = function () {
+    return moment(this.createdAt).format("DD-MM-YYYY h:mm:ss");
+};
+
 
 // Hash the plain text password before saving
 // userSchema.pre('save', async function (next) {

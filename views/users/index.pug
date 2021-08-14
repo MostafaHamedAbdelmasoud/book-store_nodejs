@@ -1,0 +1,50 @@
+extends ../layouts/layout
+
+block content
+
+    if(messages)
+        div#note #{messages}
+    .content-wrapper
+        .page-header
+            h3.page-title  Books
+        .row
+            .col-lg-12.grid-margin.stretch-card
+                .card
+                    .card-body
+                        .row
+                            .col-md-4
+                                h4.card-title List
+                            .col-md-4
+                            .col-md-4(style="text-align:right")
+                                a(href='/users/create')
+                                    button.btn.btn-primary.btn-fw(type='button') Add New Book
+                        .table-responsive
+                            table.table
+                                thead
+                                    tr
+                                        th name
+                                        th email
+                                        th created_at
+                                        th Actions
+                                tbody
+                                    each val, index in users
+                                        tr
+                                            td=val.name
+                                            td=val.email
+                                            td=val.getCreatedAt()
+                                            td.text-center
+                                                .row
+                                                    .col-md-6
+                                                        a(href="/users/edit?id="+val._id)
+                                                            button.btn.btn-success Edit
+                                                    .col-md-6
+                                                        form(method='POST' action="/users/delete" enctype='application/x-www-form-urlencoded')
+                                                            input(type='hidden' name='_method' value='DELETE')
+                                                            input(type='hidden' name='id' value=val._id)
+                                                            button.btn.btn-danger(type='submit') Delete
+
+
+
+
+
+

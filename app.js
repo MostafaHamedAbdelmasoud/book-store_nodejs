@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
+var mixins = require('./mixins/mixins');
 
 const passport = require('passport')
 const flash = require('express-flash')

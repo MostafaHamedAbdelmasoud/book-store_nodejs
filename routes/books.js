@@ -16,7 +16,11 @@ router.use((req, res, next) => {
 
 /* GET home page. */
 router.get('/index', function (req, res, next) {
-    Book.find({}, function (err, books) {
+    let query = {}
+    if (req.user.isAuthor()) {
+        query = {"postedBy": req.user._id}
+    }
+    Book.find(query, function (err, books) {
         // res.render('/usersList', {users: users});
         res.render('books', {'books': books});
     });
@@ -93,10 +97,10 @@ router.post('/update', upload, async function (req, res, next) {
         }
         console.log(requestBody)
         let query = {_id: req.query.id};
-        let bookModel = await Book.findOneAndUpdate(query, requestBody,{new:true})
+        let bookModel = await Book.findOneAndUpdate(query, requestBody, {new: true})
         // Book.update(query, requestBody);
         console.log(bookModel.name);
-        res.redirect('/books/edit?id='+ bookModel._id);
+        res.redirect('/books/edit?id=' + bookModel._id);
     } catch (e) {
         console.log(e)
         res.status(400).send(e);

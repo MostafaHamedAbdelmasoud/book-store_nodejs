@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../models/user')
+const Book = require("../models/book");
+
+/* GET users listing. */
+
+router.get('/', async (req, res) => {
+    User.find({}, function (err, users) {
+        // res.render('/usersList', {users: users});
+        res.render('users/index', {'users': users});
+    });
+})
 
 /* GET users listing. */
 
