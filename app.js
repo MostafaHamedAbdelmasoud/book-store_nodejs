@@ -42,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
+console.log(process.env.MONGODB_URL)
 
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use('css',express.static(path.join(__dirname, 'public/assets')));
@@ -51,7 +52,7 @@ app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true,
-    store:  new MongoStore({
+    store:  MongoStore.create({
         // mongooseConnection: mongoose.connection,
         mongoUrl: process.env.MONGODB_URL,
         ttl: 24 * 60 * 60
